@@ -10,8 +10,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { FaGoogle } from "react-icons/fa";
-// import { Icons } from "@/components/icons"
 import {
     Card,
     CardContent,
@@ -20,8 +18,15 @@ import {
     CardHeader,
     CardTitle,
 } from "../ui/card"
+import { account } from '@/appwrite/init'
 
 export default function Navbar() {
+
+    async function authenticateViaGoogle() {
+        const response = await account.createOAuth2Session("google", "http://localhost:3000/dashboard", "http://localhost:3000/")
+        console.log(response)
+    }
+
     return (
         <nav className={`max-w-6xl mx-auto ${styles.navbar}`}>
             <div className="max-w-5xl mx-auto">
@@ -41,7 +46,7 @@ export default function Navbar() {
                             </DialogHeader>
                             <div className="grid grid-cols-1 gap-2">
 
-                                <Button variant="outline" >
+                                <Button onClick={authenticateViaGoogle} variant="outline" >
                                     Register With Google
                                 </Button>
 
