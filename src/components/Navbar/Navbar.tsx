@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from "./navbar.module.scss"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
@@ -36,6 +36,14 @@ export default function Navbar({ isAuthenticated }: { isAuthenticated: boolean }
         await account.deleteSession("current")
         router.push("/")
     }
+
+    useEffect(() => {
+        const user = account.get()
+        user.then((res: any) => {
+            router.push("/dashboard")
+        },
+        (err) => {})
+    }, [router])
 
     return (
         <nav className={`max-w-6xl mx-auto ${styles.navbar}`}>
