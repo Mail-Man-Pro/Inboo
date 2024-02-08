@@ -7,7 +7,7 @@ import styles from "./index.module.scss"
 export default function Home() {
   return (
     <main>
-      <Navbar></Navbar>
+      <Navbar isAuthenticated={false}></Navbar>
       <div className="max-w-5xl mx-auto">
         <div className={styles.hero}>
           <Hero />
