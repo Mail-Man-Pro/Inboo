@@ -27,8 +27,7 @@ export default function Navbar({ isAuthenticated }: { isAuthenticated: boolean }
     const router = useRouter()
 
     async function authenticateViaGoogle() {
-        const response = await account.createOAuth2Session("google", "http://localhost:3000/dashboard", "http://localhost:3000/")
-        console.log(response)
+        await account.createOAuth2Session("google", "http://localhost:3000/dashboard", "http://localhost:3000/")
     }
 
     async function logOut() {
@@ -37,19 +36,10 @@ export default function Navbar({ isAuthenticated }: { isAuthenticated: boolean }
         router.push("/")
     }
 
-    useEffect(() => {
-        const user = account.get()
-        user.then((res: any) => {
-            router.push("/dashboard")
-        },
-        (err) => {})
-    }, [router])
-
     return (
         <nav className={`max-w-6xl mx-auto ${styles.navbar}`}>
             <div className="max-w-5xl mx-auto">
                 <h2 className={styles.logo}>INBOO</h2>
-
                 {
                     !isAuthenticated ? (
                         <Dialog>
